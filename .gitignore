@@ -1,0 +1,6 @@
+bin/
+temp/
+.cache/
+
+.env
+env.bat
