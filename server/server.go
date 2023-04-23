@@ -8,6 +8,7 @@ import (
 
 	"github.com/rajatxs/go-iamone/rpc"
 
+	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	gorilla_rpc "github.com/gorilla/rpc"
 	gorilla_rpc_json "github.com/gorilla/rpc/json"
@@ -31,7 +32,14 @@ func presetup() error {
 	rpcs.RegisterCodec(gorilla_rpc_json.NewCodec(), "application/json")
 	rpcs.RegisterService(new(rpc.User), "user")
 	rpcs.RegisterService(new(rpc.Common), "rpc")
-	router.Handle("/x", rpcs)
+
+	// create a CORS middleware
+	rpcHandler := handlers.CORS(
+		handlers.AllowedOrigins([]string{"*"}),
+		handlers.AllowedMethods([]string{"GET", "POST", "OPTIONS"}),
+		handlers.AllowedHeaders([]string{"Content-Type", "X-Request-Id", "X-Request-Timestamp"}))(rpcs)
+
+	router.Handle("/x", rpcHandler)
 
 	instance = &http.Server{
 		Addr:    GetAddr(),

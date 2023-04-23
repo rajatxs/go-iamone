@@ -4,6 +4,7 @@ go 1.20
 
 require (
 	github.com/golang-jwt/jwt/v5 v5.0.0-rc.2
+	github.com/gorilla/handlers v1.5.1
 	github.com/gorilla/mux v1.8.0
 	github.com/gorilla/rpc v1.2.0
 	go.mongodb.org/mongo-driver v1.11.4
@@ -11,6 +12,7 @@ require (
 )
 
 require (
+	github.com/felixge/httpsnoop v1.0.1 // indirect
 	github.com/golang/snappy v0.0.1 // indirect
 	github.com/klauspost/compress v1.13.6 // indirect
 	github.com/montanaflynn/stats v0.0.0-20171201202039-1bf9dbcd8cbe // indirect
